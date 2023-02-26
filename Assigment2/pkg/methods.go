@@ -1,7 +1,17 @@
 package pkg
 
+import (
+	"fmt"
+	"strconv"
+	b "github.com/amantaiaitolkyn/GO/Assigment2/obj"
+	"database/sql"	
+	_ "github.com/lib/pq"
+)
+
+var db *sql.DB = Db()
+
 func Authorizationn(newlogin,newpassword string){
-	user:= Authorization{login: newlogin,password: newpassword}
+	user:= b.Authorization{login: newlogin,password: newpassword}
 	rows, err := db.Query("select login,password from MyUsers where login = $1 and password =  $2", user.login,user.password)
     if err != nil {
         panic(err)
@@ -14,7 +24,7 @@ func Authorizationn(newlogin,newpassword string){
 
 
 func AddItem(id, name string,price int,seller_id string){
-	newItem := Item{item_id: id,name: name,price: price, seller_id: seller_id}
+	newItem := b.Item{item_id: id,name: name,price: price, seller_id: seller_id}
 	result,err := db.Exec("insert into items (item_id, name, price, seller_id, estimation) values ($1, $2, $3, $4, $5)",newItem.item_id, newItem.name, newItem.price, newItem.seller_id, newItem.estimation)
     if err != nil{
         panic(err)
@@ -28,10 +38,10 @@ func SearchItem(name string){
         panic(err)
     }
     
-    products := []Item{}
+    products := []b.Item{}
      
     for rows.Next(){
-        p := Item{}
+        p := b.Item{}
         err := rows.Scan(&p.item_id, &p.name, &p.price, &p.seller_id, &p.estimation)
         if err != nil{
             fmt.Println(err)
@@ -45,9 +55,9 @@ func SearchItem(name string){
         panic(err)
     }
 	
-    sellers := []Registration{}
+    sellers := []b.Registration{}
 	for rows1.Next(){
-        p := Registration{}
+        p := b.Registration{}
         err := rows1.Scan(&p.surname, &p.name, &p.login, &p.password, &p.id)
         if err != nil{
             fmt.Println(err)
@@ -66,7 +76,7 @@ func SearchItem(name string){
 }
 
 func  Register(newName , newSurname, newLogin, newPassword string) {
-	newRegister := Registration{name: newName, surname: newSurname, login: newLogin, password: newPassword}
+	newRegister := b.Registration{name: newName, surname: newSurname, login: newLogin, password: newPassword}
 	result,err := db.Exec("insert into MyUsers (name, surname, login, password) values ($1, $2, $3, $4)",newRegister.name, newRegister.surname, newRegister.login, newRegister.password)
     if err != nil{
         panic(err)
@@ -74,7 +84,7 @@ func  Register(newName , newSurname, newLogin, newPassword string) {
 	result.LastInsertId()
 }
 func  RegisterForSeller(newName , newSurname, newLogin, newPassword, newid string) {
-	newRegister := Registration{name: newName, surname: newSurname,login: newLogin, password: newPassword, id: newid}
+	newRegister := b.Registration{name: newName, surname: newSurname,login: newLogin, password: newPassword, id: newid}
 	result,err := db.Exec("insert into Seller (name, surname, login, password,id) values ($1, $2, $3, $4, $5)",newRegister.name, newRegister.surname, newRegister.login, newRegister.password, newRegister.id)
     if err != nil{
         panic(err)
@@ -83,7 +93,7 @@ func  RegisterForSeller(newName , newSurname, newLogin, newPassword, newid strin
 }
 
 func rateTheProduct(id string,newestimation float64){
-	newRating := Rating{p_id: id, estimation: newestimation}
+	newRating := b.Rating{p_id: id, estimation: newestimation}
 	result,err := db.Exec("insert into rating (p_id,estimation) values ($1, $2)",newRating.p_id, newRating.estimation)
     if err != nil{
         panic(err)
@@ -94,10 +104,10 @@ func rateTheProduct(id string,newestimation float64){
         panic(err)
     }
     
-	rating := []Rating{}
+	rating := []b.Rating{}
      
     for rows.Next(){
-        p := Rating{}
+        p := b.Rating{}
         err := rows.Scan(&p.p_id, &p.estimation)
         if err != nil{
             fmt.Println(err)
@@ -123,10 +133,10 @@ func FilteringByPrice(startPrice,endPrice int){
         panic(err)
     }
     
-    products := []Item{}
+    products := []b.Item{}
      
     for rows.Next(){
-        p := Item{}
+        p := b.Item{}
         err := rows.Scan(&p.item_id, &p.name, &p.price, &p.seller_id, &p.estimation)
         if err != nil{
             fmt.Println(err)
@@ -144,10 +154,10 @@ func FilteringByRating(startRating,endRating float64){
         panic(err)
     }
     
-    products := []Item{}
+    products := []b.Item{}
      
     for rows.Next(){
-        p := Item{}
+        p := b.Item{}
         err := rows.Scan(&p.item_id, &p.name, &p.price, &p.seller_id, &p.estimation)
         if err != nil{
             fmt.Println(err)
