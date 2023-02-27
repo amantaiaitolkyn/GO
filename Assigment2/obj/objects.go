@@ -16,11 +16,11 @@ type Item struct{
 }
 
 type Rating struct{
-	p_id string 
-	estimation float64
+	P_id string 
+	Estimation float64
 }
 
 type Authorization struct{
-	login string
-	password string
+	Login string
+	Password string
 }
