@@ -2,7 +2,7 @@ package pkg
 
 import (
 	"fmt"
-	"strconv"
+	// "strconv"
 	b "github.com/amantaiaitolkyn/GO/Assigment2/obj"
 	"database/sql"	
 	_ "github.com/lib/pq"
@@ -11,7 +11,7 @@ import (
 var db *sql.DB = Db()
 
 func Authorizationn(newlogin,newpassword string){
-	user:= b.Authorization{login: newlogin,password: newpassword}
+	user:= b.Authorization{newlogin, newpassword}
 	rows, err := db.Query("select login,password from MyUsers where login = $1 and password =  $2", user.login,user.password)
     if err != nil {
         panic(err)

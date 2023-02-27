@@ -1,7 +1,7 @@
 package main
 import (
     a "github.com/amantaiaitolkyn/GO/Assigment2/pkg"
-	b "github.com/amantaiaitolkyn/GO/Assigment2/obj"
+	// b "github.com/amantaiaitolkyn/GO/Assigment2/obj"
 )
 func main(){
 	// Register("Aiii","Aman","mylog","asasasa")

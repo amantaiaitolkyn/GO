@@ -1,18 +1,18 @@
 package obj
 
 type Registration struct {
-	name     string
-	surname  string
-	login    string
-	password string
-	id string
+	Name     string
+	Surname  string
+	Login    string
+	Password string
+	Id string
 }
 type Item struct{
-	item_id string 
-	name string 
-	price int
-	seller_id string
-	estimation float64
+	Item_id string 
+	Name string 
+	Price int
+	Seller_id string
+	Estimation float64
 }
 
 type Rating struct{
