@@ -3,7 +3,9 @@ import (
     // "database/sql"
 	// "gorm.io/driver/sqlite"
     // _ "github.com/lib/pq"
-	"gorm.io/gorm "
+	"gorm.io/gorm"
+	"gorm.io/driver/postgres"
+	"fmt"
 )
 
 func DB() *gorm.DB {

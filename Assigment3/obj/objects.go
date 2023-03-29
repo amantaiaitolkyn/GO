@@ -1,7 +1,7 @@
 package obj
 
 import (
-	"gorm.io/gorm "
+	"gorm.io/gorm"
 )
 
 type Listofbook struct {
