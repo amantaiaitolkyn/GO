@@ -2,15 +2,13 @@ package main
 
 import (
   "context"
-//   "encoding/json"
   "fmt"
-//   "net/http"
   "os"
   "os/signal"
   "sync"
-
   "github.com/go-telegram/bot"
   "github.com/go-telegram/bot/models"
+  "github.com/amantaiaitolkyn/GO/Assigment4/unsplash"
 )
 
 // const (
@@ -89,7 +87,7 @@ func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
     return
   }
 
-  imageURL, err := GetRandomUnsplashImageURL()
+  imageURL, err := b.GetRandomUnsplashImageURL()
   if err != nil {
     b.SendMessage(ctx, &bot.SendMessageParams{
       ChatID: update.Message.Chat.ID,
